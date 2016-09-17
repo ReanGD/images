@@ -1,0 +1,11 @@
+version: '2'
+services:
+  base:
+    restart: unless-stopped
+    image: reangd/alpine-base:latest
+    container_name: alpine-base
+    environment:
+      - S6_LOGGING=0
+    volumes:
+      - ./log:/var/log:rw
+      - /etc/localtime:/etc/localtime:ro
