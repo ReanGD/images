@@ -1,0 +1,21 @@
+version: '2'
+services:
+  consul:
+    build: .
+    restart: unless-stopped
+    # container_name: alpine-consul
+    image: reangd/alpine-consul:latest
+    environment:
+      - S6_LOGGING=0
+      # - CONSUL_OPTIONS=-server -bootstrap -client 0.0.0.0 -ui
+    ports:
+      # - "8300:8300"  # server RPC      
+      # - "8301:8301"  # serf LAN
+      # - "8302:8302"  # serf WAN
+      # - "8400:8400"  # CLI RPC
+      - "8500:8500"  # HTTP
+      # - "8600:8600"  # DNS
+    volumes:
+      # - ./log:/var/log:rw
+      # - ./consul:/consul/data:rw
+      - /etc/localtime:/etc/localtime:ro

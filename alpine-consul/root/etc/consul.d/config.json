@@ -1,0 +1,15 @@
+{
+    "datacenter": "local",
+    "data_dir": "/consul/data",
+    "disable_anonymous_signature": true,
+    "disable_remote_exec": true,
+    "disable_update_check": true,
+    "dns_config": {
+        "allow_stale": true,
+        "max_stale": "5s"
+    },
+    "domain": "consul.",
+    "enable_syslog": false,
+    "log_level": "INFO",
+    "ui_dir": "/consul/ui"
+}
