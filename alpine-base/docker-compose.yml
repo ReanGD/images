@@ -1,6 +1,7 @@
 version: '2'
 services:
   base:
+    build: .
     restart: unless-stopped
     image: reangd/alpine-base:latest
     container_name: alpine-base

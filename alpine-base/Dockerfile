@@ -8,7 +8,7 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
     TERM=xterm
 
 RUN S6_OVERLAY_VERSION=v1.18.1.5 && \
-	apk add --no-cache bash bind-tools ca-certificates curl jq && \
+    apk add --no-cache bash bind-tools ca-certificates curl jq && \
     curl -sSL https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz | tar xz -C /
 
 ENTRYPOINT [ "/init" ]

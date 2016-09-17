@@ -2,8 +2,14 @@ alpine-base
 ===
 
 
-### Images name:
+### Image name:
 reangd/alpine-base:latest
+
+
+### Example:
+```
+docker run -it --rm reangd/alpine-base:latest /bin/bash
+```
 
 
 ### Customizing:

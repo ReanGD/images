@@ -28,3 +28,12 @@ docker run -it --rm -p 8500:8500 --env="S6_LOGGING=0" reangd/alpine-consul:lates
 ### Volumes:
 * `/var/log` - logs directory
 * `/consul/data` - consul data directory
+
+
+### Ports:
+* `8300` - server RPC
+* `8301` - serf LAN
+* `8302` - serf WAN
+* `8400` - CLI RPC
+* `8500` - HTTP
+* `8600` - DNS
