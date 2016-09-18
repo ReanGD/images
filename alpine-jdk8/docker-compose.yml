@@ -3,7 +3,7 @@ services:
   base:
     build: .
     restart: unless-stopped
-    image: reangd/alpine-jre8:latest
+    image: reangd/alpine-jdk8:latest
     environment:
       - S6_LOGGING=0
       - CONSUL_SERVICENAME=java               # service name to register

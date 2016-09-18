@@ -1,15 +1,15 @@
-alpine-jre8
+alpine-jdk8
 ===
 
 
 ### Image name:
-reangd/alpine-jre8:latest
+reangd/alpine-jdk8:latest
 
 
 ### Example:
 ```
 docker run -it --rm -p 8500:8500 --env="S6_LOGGING=0" reangd/alpine-consul:latest /bin/bash
-docker run -it --rm --env="S6_LOGGING=0" --env="CONSUL_SERVICENAME=java" reangd/alpine-jre8:latest /bin/bash
+docker run -it --rm --env="S6_LOGGING=0" --env="CONSUL_SERVICENAME=java" reangd/alpine-jdk8:latest /bin/bash
 ```
 
 
