@@ -19,8 +19,9 @@ docker run -it --rm --env="S6_LOGGING=0" reangd/alpine-base:latest /bin/bash
 
 
 ### Environment variables:
-* `CONTAINER_HOST` - hostname
-* `CONTAINER_IP` - ip
+* `CONTAINER_HOST`: hostname
+* `CONTAINER_IP`: ip
+* `CONTAINER_GATEWAY`: gateway
 
 
 ### Volumes:

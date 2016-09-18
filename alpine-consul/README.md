@@ -20,8 +20,9 @@ docker run -it --rm -p 8500:8500 --env="S6_LOGGING=0" reangd/alpine-consul:lates
 
 
 ### Environment variables:
-* `CONTAINER_HOST` - hostname
-* `CONTAINER_IP` - ip
+* `CONTAINER_HOST`: hostname
+* `CONTAINER_IP`: ip
+* `CONTAINER_GATEWAY`: gateway
 
 
 ### Volumes:

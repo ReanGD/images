@@ -2,6 +2,7 @@
 
 CONTAINER_HOST=$(cat /etc/hostname)
 if [ -z ${CONTAINER_HOST} ]; then
+    echo "==> Not found CONTAINER_HOST"
     exit 1
 fi
 export CONTAINER_HOST
@@ -9,7 +10,16 @@ printf "%s" "${CONTAINER_HOST}" > /var/run/s6/container_environment/CONTAINER_HO
 
 CONTAINER_IP=$(ip route get 1|awk '{ print $NF; exit; }')
 if [ -z ${CONTAINER_IP} ]; then
-    exit 2
+    echo "==> Not found CONTAINER_IP"
+    exit 1
 fi
 export CONTAINER_IP
 printf "%s" "${CONTAINER_IP}" > /var/run/s6/container_environment/CONTAINER_IP
+
+CONTAINER_GATEWAY=$(ip route get 1|awk '{ print $3; exit; }')
+if [ -z ${CONTAINER_GATEWAY} ]; then
+    echo "==> Not found CONTAINER_GATEWAY"
+    exit 1
+fi
+export CONTAINER_GATEWAY
+printf "%s" "${CONTAINER_GATEWAY}" > /var/run/s6/container_environment/CONTAINER_GATEWAY
