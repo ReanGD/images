@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv sh
+
+echo "==> Registering container to consul"
+/etc/cont-consul/register

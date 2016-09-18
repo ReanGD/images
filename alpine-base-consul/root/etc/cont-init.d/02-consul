@@ -1,0 +1,76 @@
+#!/usr/bin/with-contenv sh
+
+if [ -z ${CONSUL_IP} ]; then
+    CONSUL_IP=${CONTAINER_GATEWAY}
+fi
+export CONSUL_IP
+printf "%s" "${CONSUL_IP}" > /var/run/s6/container_environment/CONSUL_IP
+
+if [ -z ${CONSUL_PORT} ]; then
+    echo "==> Not set CONSUL_PORT"
+    exit 1
+fi
+export CONSUL_PORT
+printf "%s" "${CONSUL_PORT}" > /var/run/s6/container_environment/CONSUL_PORT
+
+CONSUL_ADDRESS=${CONSUL_IP}:${CONSUL_PORT}
+export CONSUL_ADDRESS
+printf "%s" "${CONSUL_ADDRESS}" > /var/run/s6/container_environment/CONSUL_ADDRESS
+
+if [ -z ${CONSUL_SERVICENAME} ]; then
+    echo "==> Not set CONSUL_SERVICENAME"
+    exit 1
+fi
+export CONSUL_SERVICENAME
+printf "%s" "${CONSUL_SERVICENAME}" > /var/run/s6/container_environment/CONSUL_SERVICENAME
+
+if [ ! -z ${CONSUL_SERVICEPORT} ]; then
+    export CONSUL_SERVICEPORT
+    printf "%s" "${CONSUL_SERVICEPORT}" > /var/run/s6/container_environment/CONSUL_SERVICEPORT
+fi
+
+if [ ! -z ${CONSUL_SERVICETAGS} ]; then
+    export CONSUL_SERVICETAGS
+    printf "%s" "${CONSUL_SERVICETAGS}" > /var/run/s6/container_environment/CONSUL_SERVICETAGS
+fi
+
+if [ -z ${CONSUL_CHECKTYPE} ]; then
+    echo "==> Not set CONSUL_CHECKTYPE"
+    exit 1
+fi
+export CONSUL_CHECKTYPE
+printf "%s" "${CONSUL_CHECKTYPE}" > /var/run/s6/container_environment/CONSUL_CHECKTYPE
+
+case ${CONSUL_CHECKTYPE} in
+    http)
+        if [ -z ${CONSUL_CHECKHTTP} ]; then
+            echo "==> Not set CONSUL_CHECKHTTP"
+            exit 1
+        fi
+        export CONSUL_CHECKHTTP
+        printf "%s" "${CONSUL_CHECKHTTP}" > /var/run/s6/container_environment/CONSUL_CHECKHTTP
+        ;;
+    tcp)
+        if [ -z ${CONSUL_CHECKPORT} ]; then
+            CONSUL_CHECKPORT=${CONSUL_SERVICEPORT}
+        fi
+        export CONSUL_CHECKPORT
+        printf "%s" "${CONSUL_CHECKPORT}" > /var/run/s6/container_environment/CONSUL_CHECKPORT
+        ;;
+esac
+
+if [ ${CONSUL_CHECKTYPE} -ne "none" ]; then
+    if [ -z ${CONSUL_CHECKINTERVAL} ]; then
+        echo "==> Not set CONSUL_CHECKINTERVAL"
+        exit 1
+    fi
+    export CONSUL_CHECKINTERVAL
+    printf "%s" "${CONSUL_CHECKINTERVAL}" > /var/run/s6/container_environment/CONSUL_CHECKINTERVAL
+
+    if [ -z ${CONSUL_CHECKTIMEOUT} ]; then
+        echo "==> Not set CONSUL_CHECKTIMEOUT"
+        exit 1
+    fi
+    export CONSUL_CHECKTIMEOUT
+    printf "%s" "${CONSUL_CHECKTIMEOUT}" > /var/run/s6/container_environment/CONSUL_CHECKTIMEOUT
+fi

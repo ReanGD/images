@@ -1,0 +1,34 @@
+version: '2'
+services:
+  base:
+    build: .
+    restart: unless-stopped
+    image: reangd/alpine-base-consul:latest
+    environment:
+      - S6_LOGGING=0
+      # 
+      # Consul params
+      # 
+      # - CONSUL_IP=1.2.3.4                          # ip of the consul instance (optional)
+      # - CONSUL_PORT=8500                           # port of the consul instance
+      - CONSUL_SERVICENAME=test_name               # service name to register
+      - CONSUL_SERVICEPORT=1234                    # service port (optional)
+      - CONSUL_SERVICETAGS=local,foo               # service tags (optional)
+      - CONSUL_CHECKTYPE=none                      # health check type (none/http/tcp)
+      #
+      # HTTP health check
+      #
+      #- CONSUL_CHECKTYPE=http
+      #- CONSUL_CHECKHTTP=http://foo:1234          # HTTP url
+      #- CONSUL_CHECKINTERVAL=15s                  # check interval
+      #- CONSUL_CHECKTIMEOUT=10s                   # check timeout
+      #
+      # TCP health check
+      #
+      #- CONSUL_CHECKTYPE=tcp
+      #- CONSUL_CHECKPORT=5678                     # custom TCP port if different from CONSUL_SERVICEPORT
+      #- CONSUL_CHECKINTERVAL=15s                  # check interval
+      #- CONSUL_CHECKTIMEOUT=10s                   # check timeout
+    volumes:
+      # - ./log:/var/log:rw
+      - /etc/localtime:/etc/localtime:ro

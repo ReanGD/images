@@ -1,0 +1,17 @@
+{{- $host := env "CONTAINER_HOST" -}}
+{{- $name := env "CONSUL_SERVICENAME" -}}
+{{- $check_type := env "CONSUL_CHECKTYPE" -}}
+{{- $check_http := env "CONSUL_CHECKHTTP" -}}
+{{- $check_interval := env "CONSUL_CHECKINTERVAL" -}}
+{{- $check_timeout := env "CONSUL_CHECKTIMEOUT" -}}
+{{- if eq $check_type "http" -}}
+{{- if and $host $name $check_http $check_interval $check_timeout -}}
+{
+    "id": "{{print $name "-" $host "-http-" $check_http}}",
+    "name": "check HTTP {{$check_http}}",
+    "http": "{{$check_http}}",
+    "interval": {{$check_interval}},
+    "timeout": {{$check_timeout}}
+}
+{{- end -}}
+{{- end -}}
