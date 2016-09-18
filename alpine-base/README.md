@@ -8,7 +8,7 @@ reangd/alpine-base:latest
 
 ### Example:
 ```
-docker run -it --rm reangd/alpine-base:latest /bin/bash
+docker run -it --rm --env="S6_LOGGING=0" reangd/alpine-base:latest /bin/bash
 ```
 
 

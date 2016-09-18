@@ -5,11 +5,10 @@ ENV CONSUL_OPTIONS="-server -bootstrap -client 0.0.0.0 -ui"
 RUN CONSUL_VERSION=0.7.0 && \
     CONSUL_BASE_PATH=https://releases.hashicorp.com/consul/${CONSUL_VERSION} && \
     \
-    mkdir /var/lib/consul && \
+    mkdir -p /consul/data /consul/ui && \
     addgroup consul && \
     adduser -S -D -H -g "" -G consul -s /sbin/nologin consul && \
-    chown -R consul:consul /var/lib/consul && \
-    mkdir -p /consul/data /consul/ui && \
+    chown -R consul:consul /consul && \
     \
     apk add --no-cache gnupg && \
     gpg --recv-keys 91A6E7F85D05C65630BEF18951852D87348FFC4C && \
