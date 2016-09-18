@@ -1,0 +1,12 @@
+version: '2'
+services:
+  base:
+    build: .
+    restart: unless-stopped
+    image: reangd/alpine-jre8:latest
+    environment:
+      - S6_LOGGING=0
+      - CONSUL_SERVICENAME=java               # service name to register
+    volumes:
+      # - ./log:/var/log:rw
+      - /etc/localtime:/etc/localtime:ro
