@@ -57,6 +57,8 @@ case ${CONSUL_CHECKTYPE} in
         export CONSUL_CHECKPORT
         printf "%s" "${CONSUL_CHECKPORT}" > /var/run/s6/container_environment/CONSUL_CHECKPORT
         ;;
+    none)
+        ;;
 esac
 
 if [ ${CONSUL_CHECKTYPE} -ne "none" ]; then

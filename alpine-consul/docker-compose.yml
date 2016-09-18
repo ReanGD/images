@@ -9,12 +9,13 @@ services:
       - S6_LOGGING=0
       # - CONSUL_OPTIONS=-server -bootstrap -client 0.0.0.0 -ui
     ports:
-      # - "8300:8300"  # server RPC      
-      # - "8301:8301"  # serf LAN
-      # - "8302:8302"  # serf WAN
-      # - "8400:8400"  # CLI RPC
-      - "8500:8500"  # HTTP
-      # - "8600:8600"  # DNS
+      # - "8300:8300"      # server RPC      
+      # - "8301:8301"      # serf LAN
+      # - "8302:8302"      # serf WAN
+      # - "8400:8400"      # CLI RPC
+      - "8500:8500"      # HTTP
+      - "8600:8600"      # DNS
+      - "8600:8600/udp"  # DNS
     volumes:
       # - ./log:/var/log:rw
       # - ./consul:/consul/data:rw
