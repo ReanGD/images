@@ -1,6 +1,6 @@
 version: '2'
 services:
-  base:
+  jdk:
     build: .
     restart: unless-stopped
     image: reangd/alpine-jdk8:latest

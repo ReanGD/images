@@ -1,6 +1,6 @@
 version: '2'
 services:
-  base:
+  consul-base:
     build: .
     restart: unless-stopped
     image: reangd/alpine-base-consul:latest
