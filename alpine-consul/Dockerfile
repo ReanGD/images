@@ -27,7 +27,7 @@ RUN CONSUL_VERSION=0.7.0 && \
     cd / && \
     \
     rm -rf /root/.gnupg && \
-    apk del --rdepends gnupg
+    apk del --rdepends --purge gnupg
 
 # 8300 - Server RPC is used for communication between Consul clients and servers
 #  for internal request forwarding.

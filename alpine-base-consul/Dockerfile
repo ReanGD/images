@@ -32,6 +32,6 @@ RUN CONSULTEMPLATE_VERSION=0.15.0 && \
     cd / && \
     \
     rm -rf /root/.gnupg && \
-    apk del --rdepends gnupg
+    apk del --rdepends --purge gnupg
 
 COPY root /
