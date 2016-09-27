@@ -1,0 +1,14 @@
+version: '2'
+services:
+  base:
+    build: .
+    restart: unless-stopped
+    image: reangd/alpine-registrator:latest
+    environment:
+      - S6_LOGGING=0
+      # - CONSUL_IP=1.2.3.4
+      # - CONSUL_PORT=8500
+      # - REGISTRATOR_OPTIONS=-internal
+    volumes:
+      # - ./log:/var/log:rw
+      - /etc/localtime:/etc/localtime:ro

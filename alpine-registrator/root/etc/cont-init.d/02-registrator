@@ -1,0 +1,17 @@
+#!/usr/bin/with-contenv sh
+
+if [ -z ${CONSUL_IP} ]; then
+    CONSUL_IP=${CONTAINER_GATEWAY}
+fi
+export CONSUL_IP
+printf "%s" "${CONSUL_IP}" > /var/run/s6/container_environment/CONSUL_IP
+
+if [ -z ${CONSUL_PORT} ]; then
+    echo "==> Not set CONSUL_PORT"
+    exit 1
+fi
+export CONSUL_PORT
+printf "%s" "${CONSUL_PORT}" > /var/run/s6/container_environment/CONSUL_PORT
+
+export REGISTRATOR_OPTIONS
+printf "%s" "${REGISTRATOR_OPTIONS}" > /var/run/s6/container_environment/REGISTRATOR_OPTIONS
