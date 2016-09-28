@@ -3,6 +3,7 @@ services:
   base:
     build: .
     restart: unless-stopped
+    network_mode: "bridge"
     image: reangd/alpine-registrator:latest
     environment:
       - S6_LOGGING=0
@@ -11,4 +12,5 @@ services:
       # - REGISTRATOR_OPTIONS=-internal
     volumes:
       # - ./log:/var/log:rw
+      - /var/run/docker.sock:/tmp/docker.sock
       - /etc/localtime:/etc/localtime:ro

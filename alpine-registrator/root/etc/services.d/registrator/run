@@ -1,3 +1,3 @@
 #!/usr/bin/with-contenv sh
 
-exec /bin/registrator ${REGISTRATOR_OPTIONS} ${CONSUL_IP}:${CONSUL_PORT}
+exec /bin/registrator ${REGISTRATOR_OPTIONS} consul://${CONSUL_IP}:${CONSUL_PORT}

@@ -8,7 +8,7 @@ reangd/alpine-registrator:latest
 
 ### Example:
 ```
-docker run -it --rm --env="S6_LOGGING=0" reangd/alpine-registrator:latest /bin/bash
+docker run -it --rm --env="S6_LOGGING=0" --volume=/var/run/docker.sock:/tmp/docker.sock reangd/alpine-registrator:latest /bin/bash
 ```
 
 

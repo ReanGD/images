@@ -3,7 +3,7 @@ services:
   consul:
     build: .
     restart: unless-stopped
-    # container_name: alpine-consul
+    network_mode: "bridge"
     image: reangd/alpine-consul:latest
     environment:
       - S6_LOGGING=0
@@ -16,7 +16,6 @@ services:
       - "8500:8500"      # HTTP
       - "8600:8600"      # DNS
       - "8600:8600/udp"  # DNS
-    network_mode: "bridge"
     volumes:
       # - ./log:/var/log:rw
       # - ./consul:/consul/data:rw
