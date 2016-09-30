@@ -5,7 +5,6 @@ ENV CONSUL_IP="" \
     REGISTRATOR_OPTIONS="-internal"
 
 RUN REGISTRATOR_VER=7 && \
-    apk add --no-cache curl && \
     apk add --no-cache go git gcc libc-dev && \
     mkdir -p /tmp/src/github.com/gliderlabs/ && \
     curl -sSL https://github.com/gliderlabs/registrator/archive/v${REGISTRATOR_VER}.tar.gz | tar xz -C /tmp/src/github.com/gliderlabs/ && \
@@ -15,7 +14,6 @@ RUN REGISTRATOR_VER=7 && \
     go build -ldflags "-X main.Version=$(cat VERSION)" -o /bin/registrator && \
     cd / && \
     rm -rf /tmp/* && \
-    apk del --rdepends --purge curl && \
     apk del --rdepends --purge go git gcc libc-dev
 
 COPY root /
