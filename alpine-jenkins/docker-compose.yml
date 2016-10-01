@@ -1,0 +1,25 @@
+version: '2'
+services:
+  jenkins:
+    build: .
+    # restart: unless-stopped
+    image: reangd/alpine-jenkins:latest
+    network_mode: "bridge"
+    environment:
+      - S6_LOGGING=0
+      # - JAVA_OPTS=...
+      # - JENKINS_OPTS=...
+      # 
+      # Registrator params:
+      # 
+      - SERVICE_NAME=jenkins
+      - SERVICE_TAGS=local
+      - SERVICE_CHECK_TCP=true
+      - SERVICE_CHECK_INTERVAL=15s
+      - SERVICE_CHECK_TIMEOUT=10s
+    ports:
+      - "80:8080"      # HTTP
+    volumes:
+      # - ./log:/var/log:rw
+      # - ./jenkins:/jenkins:rw
+      - /etc/localtime:/etc/localtime:ro
