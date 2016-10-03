@@ -9,7 +9,7 @@ services:
       - S6_LOGGING=0
       # - CONSUL_IP=1.2.3.4
       # - CONSUL_PORT=8500
-      # - REGISTRATOR_OPTIONS=-internal
+      - REGISTRATOR_OPTIONS=-internal -resync 600
     volumes:
       # - ./log:/var/log:rw
       - /var/run/docker.sock:/tmp/docker.sock

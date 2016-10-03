@@ -7,6 +7,7 @@ services:
     image: reangd/alpine-consul:latest
     environment:
       - S6_LOGGING=0
+      - SERVICE_IGNORE=true
       # - CONSUL_OPTIONS=-server -bootstrap -client 0.0.0.0 -ui
     ports:
       # - "8300:8300"      # server RPC      

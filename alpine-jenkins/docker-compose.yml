@@ -2,7 +2,7 @@ version: '2'
 services:
   jenkins:
     build: .
-    # restart: unless-stopped
+    restart: unless-stopped
     image: reangd/alpine-jenkins:latest
     network_mode: "bridge"
     environment:
