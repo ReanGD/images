@@ -1,0 +1,15 @@
+version: '2'
+services:
+  jenkins:
+    build: .
+    restart: unless-stopped
+    image: reangd/alpine-dokuwiki:latest
+    network_mode: "bridge"
+    environment:
+      - S6_LOGGING=0
+    ports:
+      - "80:80"      # HTTP
+    volumes:
+      # - ./log:/var/log:rw
+      # - ./data:/data:rw
+      - /etc/localtime:/etc/localtime:ro
