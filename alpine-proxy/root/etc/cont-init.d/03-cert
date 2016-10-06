@@ -1,0 +1,42 @@
+#!/usr/bin/with-contenv sh
+
+if [ -z ${CERT_EMAIL} ]; then
+    echo "==> Not set varaible CERT_EMAIL"
+    exit 1
+fi
+export CERT_EMAIL
+printf "%s" "${CERT_EMAIL}" > /var/run/s6/container_environment/CERT_EMAIL
+
+if [ -z ${CERT_DOMAIN} ]; then
+    echo "==> Not set varaible CERT_DOMAIN"
+    exit 1
+fi
+export CERT_DOMAIN
+printf "%s" "${CERT_DOMAIN}" > /var/run/s6/container_environment/CERT_DOMAIN
+
+if [ ! -d "/etc/letsencrypt/live/" ]; then
+    nginx -c /etc/nginx/nginx80.conf
+    i=0
+    success=0
+    while [ "$i" -lt 10 ]
+    do
+       if curl --output /dev/null --silent --head --fail ${CERT_DOMAIN}; then
+          echo "${CERT_DOMAIN} connection success"
+          certbot certonly --test-cert --no-self-upgrade --agree-tos --email ${CERT_EMAIL} --webroot -w /var/www/default -d ${CERT_DOMAIN}
+          success=1
+          break
+       fi
+
+       echo "${CERT_DOMAIN} connection failed"
+       sleep 1
+       i=`expr $i + 1`
+    done
+    nginx -c /etc/nginx/nginx80.conf -s quit
+
+    if [ $success -eq 0 ]; then
+        echo "Nginx wait failed"
+        exit 1
+    fi
+fi
+
+sed -i -e "s/example.com/${CERT_DOMAIN}/g" /etc/nginx/nginx.conf
