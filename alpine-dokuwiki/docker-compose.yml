@@ -7,8 +7,18 @@ services:
     network_mode: "bridge"
     environment:
       - S6_LOGGING=0
-    ports:
-      - "80:80"      # HTTP
+      # - NGINX_OPTIONS="..."
+      # 
+      # Registrator params:
+      # 
+      - SERVICE_443_IGNORE=true
+      - SERVICE_80_NAME=dokuwiki
+      - SERVICE_80_TAGS=public
+      - SERVICE_80_CHECK_TCP=true
+      - SERVICE_80_CHECK_INTERVAL=15s
+      - SERVICE_80_CHECK_TIMEOUT=10s
+    # ports:
+      # - "80:80"      # HTTP
     volumes:
       # - ./log:/var/log:rw
       # - ./data:/data:rw

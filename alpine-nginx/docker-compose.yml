@@ -2,11 +2,12 @@ version: '2'
 services:
   jenkins:
     build: .
-    # restart: unless-stopped
+    restart: unless-stopped
     image: reangd/alpine-nginx:latest
     network_mode: "bridge"
     environment:
       - S6_LOGGING=0
+      # - NGINX_OPTIONS="..."
     ports:
       - "80:80"      # HTTP
       # - "443:443"    # HTTPS
