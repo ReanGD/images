@@ -7,7 +7,7 @@ add_dir () {
 
   if [ ! -d "/data/$1" ]; then
     cp -rp /backup/$1 /data/$2
-    chown -R nobody:www-data /dokuwiki/$1
+    chown -R nobody:www-data /www/dokuwiki/$1
   fi
 }
 
