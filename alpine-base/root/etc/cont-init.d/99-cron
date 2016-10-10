@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv sh
 
-if [ -z ${SERVICE_CRON} ]; then
+if [ ! -z ${SERVICE_CRON} ]; then
     echo "==> Enabled cron service"
     rm -f /etc/services.d/cron/down
 fi

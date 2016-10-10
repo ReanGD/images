@@ -1,5 +1,6 @@
 #!/usr/bin/with-contenv sh
 
 echo "==> Start restore $1"
-/usr/bin/rsync -av "/backup/$1/docker/data/" "/data/"
-echo "==> Restore finished success"
+/usr/bin/rsync -av "/backup/$1/docker/data/" "/data/" \
+&& echo "==> Restore succeed" \
+|| echo "==> Restore failure"

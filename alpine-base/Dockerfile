@@ -15,5 +15,6 @@ RUN S6_OVERLAY_VERSION=v1.18.1.5 && \
     curl -sSL https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz | tar xz -C /
 
 ENTRYPOINT [ "/init" ]
-VOLUME ["/var/log", "/backup", "/data"]
+# VOLUME ["/backup"]
+VOLUME ["/var/log", "/data"]
 COPY root /

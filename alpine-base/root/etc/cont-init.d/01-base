@@ -35,5 +35,9 @@ if [ -d "/backup" ]; then
 
     SERVICE_CRON=1
 fi
+
+export SERVICE_CRON
+printf "%s" "${SERVICE_CRON}" > /var/run/s6/container_environment/SERVICE_CRON
+
 export CONTAINER_BACKUP
 printf "%s" "${CONTAINER_BACKUP}" > /var/run/s6/container_environment/CONTAINER_BACKUP
