@@ -23,3 +23,10 @@ if [ -z ${CONTAINER_GATEWAY} ]; then
 fi
 export CONTAINER_GATEWAY
 printf "%s" "${CONTAINER_GATEWAY}" > /var/run/s6/container_environment/CONTAINER_GATEWAY
+
+if [ ! -z ${CONTAINER_BACKUP} ]; then
+	echo "==> Enabling backup"
+	rm -f /etc/services.d/cron/down
+fi
+export CONTAINER_BACKUP
+printf "%s" "${CONTAINER_BACKUP}" > /var/run/s6/container_environment/CONTAINER_BACKUP
