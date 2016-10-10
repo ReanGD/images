@@ -24,9 +24,16 @@ fi
 export CONTAINER_GATEWAY
 printf "%s" "${CONTAINER_GATEWAY}" > /var/run/s6/container_environment/CONTAINER_GATEWAY
 
-if [ ! -z ${CONTAINER_BACKUP} ]; then
-	echo "==> Enabling backup"
-	rm -f /etc/services.d/cron/down
+CONTAINER_BACKUP=""
+if [ -d "/backup" ]; then
+    CONTAINER_BACKUP=1
+    if [ ! -z ${RESTORE_NAME} ]; then
+        /usr/bin/restore ${RESTORE_NAME}
+        exit 1
+    fi
+    echo "==> Enabled backup"
+
+    SERVICE_CRON=1
 fi
 export CONTAINER_BACKUP
 printf "%s" "${CONTAINER_BACKUP}" > /var/run/s6/container_environment/CONTAINER_BACKUP

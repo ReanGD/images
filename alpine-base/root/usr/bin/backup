@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv sh
+
+if [ ! -z ${CONTAINER_BACKUP} ]; then
+	/usr/bin/rsnapshot -c /etc/rsnapshot_root.conf "$@"
+fi
+
+

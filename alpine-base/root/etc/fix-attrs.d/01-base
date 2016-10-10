@@ -1,1 +1,2 @@
+/var/log true root:root 0644 0755
 /etc/crontabs true root:root 0600 0755
