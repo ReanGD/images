@@ -1,8 +1,0 @@
-#!/usr/bin/with-contenv sh
-
-echo "==> Removing container configuration"
-rm -f /etc/cont-consul/services.d/container.json
-rm -f /etc/cont-consul/checks.d/container-*.json
-
-echo "==> Disabling services configuration"
-touch /etc/services.d/consul-template/down

@@ -1,4 +1,0 @@
-#!/usr/bin/with-contenv sh
-
-echo "==> Deregistering container from consul"
-/etc/cont-consul/deregister
