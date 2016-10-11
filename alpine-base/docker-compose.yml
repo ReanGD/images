@@ -3,6 +3,7 @@ services:
   base:
     build: .
     restart: unless-stopped
+    network_mode: "bridge"
     image: reangd/alpine-base:latest
     container_name: alpine-base
     environment:
