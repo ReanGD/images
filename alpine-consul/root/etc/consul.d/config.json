@@ -1,6 +1,6 @@
 {
     "datacenter": "local",
-    "data_dir": "/consul/data",
+    "data_dir": "/data",
     "disable_anonymous_signature": true,
     "disable_remote_exec": true,
     "disable_update_check": true,

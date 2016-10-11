@@ -5,7 +5,7 @@ ENV CONSUL_OPTIONS="-server -bootstrap -client 0.0.0.0 -ui"
 RUN CONSUL_VERSION=0.7.0 && \
     CONSUL_BASE_PATH=https://releases.hashicorp.com/consul/${CONSUL_VERSION} && \
     \
-    mkdir -p /consul/data /consul/ui && \
+    mkdir -p /consul/ui && \
     addgroup consul && \
     adduser -S -D -H -g "" -G consul -s /sbin/nologin consul && \
     chown -R consul:consul /consul && \
@@ -41,5 +41,4 @@ RUN CONSUL_VERSION=0.7.0 && \
 #  are the primary interfaces that applications
 #  use to interact with Consul.
 EXPOSE 8300 8301 8301/udp 8302 8302/udp 8400 8500 8600 8600/udp
-VOLUME ["/consul/data"]
 COPY root /

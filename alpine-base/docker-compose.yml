@@ -8,7 +8,7 @@ services:
     environment:
       - S6_LOGGING=0
       # - SERVICE_CRON=1
-      # - RESTORE_NAME="daily.1"
+      # - RESTORE_NAME=daily.0
     volumes:
       # - ./log:/var/log:rw
       # - ./backup:/backup:rw

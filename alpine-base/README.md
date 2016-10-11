@@ -9,7 +9,7 @@ reangd/alpine-base:latest
 ### Example:
 ```
 docker run -it --rm --env="S6_LOGGING=0" reangd/alpine-base:latest /bin/bash
-docker run --rm --env="S6_LOGGING=0" --env="RESTORE_NAME=daily.1" -v /home/rean/tmp/test:/data -v /home/rean/tmp/backup:/backup reangd/alpine-base:latest
+docker run --rm --env="S6_LOGGING=0" --env="RESTORE_NAME=daily.0" -v /home/rean/tmp/test:/data -v /home/rean/tmp/backup:/backup reangd/alpine-base:latest
 ```
 
 
@@ -18,7 +18,7 @@ docker run --rm --env="S6_LOGGING=0" --env="RESTORE_NAME=daily.1" -v /home/rean/
   * **`0`**: Outputs everything to stdout/stderr.
   * **`1`**: Uses an internal `catch-all` logger and persists everything on it, it is located in `/var/log/s6-uncaught-logs`. Nothing would be written to stdout/stderr.
 * `SERVICE_CRON` (defaul = auto): is enable run cron service
-* `RESTORE_NAME` (defaul = ""): backup name for the restore (for example: "daily.1")
+* `RESTORE_NAME` (defaul = ""): backup name for the restore (for example: "daily.0")
 
 
 ### Environment variables:
