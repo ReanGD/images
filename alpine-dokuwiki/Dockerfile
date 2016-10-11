@@ -10,18 +10,16 @@ RUN DOKUWIKI_VERSION="2016-06-26a" && \
     chmod -R 644 /www && \
     find /www -type d -exec chmod 0755 {} ';' && \
     \
-    mkdir -p /backup/lib && \
-    cp -rp /www/dokuwiki/data /backup/ && \
-    cp -rp /www/dokuwiki/conf /backup/ && \
-    cp -rp /www/dokuwiki/lib/plugins /backup/lib/ && \
-    cp -rp /www/dokuwiki/lib/tpl /backup/lib/ && \
+    mkdir -p /origin/lib && \
+    cp -rp /www/dokuwiki/data /origin/ && \
+    cp -rp /www/dokuwiki/conf /origin/ && \
+    cp -rp /www/dokuwiki/lib/plugins /origin/lib/ && \
+    cp -rp /www/dokuwiki/lib/tpl /origin/lib/ && \
     \
-    mkdir /data && \
     rm -rf /www/dokuwiki/data /www/dokuwiki/conf /www/dokuwiki/lib/plugins /www/dokuwiki/lib/tpl && \
     ln -s /data/data /www/dokuwiki/data && \
     ln -s /data/conf /www/dokuwiki/conf && \
     ln -s /data/lib/plugins /www/dokuwiki/lib/plugins && \
     ln -s /data/lib/tpl /www/dokuwiki/lib/tpl
 
-VOLUME ["/data"]
 COPY root /
