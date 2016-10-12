@@ -1,4 +1,4 @@
-daemon on;
+daemon off;
 user nginx;
 worker_processes  1;
 
@@ -36,8 +36,32 @@ http {
 
     server {
         listen 80;
-        server_name "";
+        listen 443 ssl;
+        keepalive_timeout   70;
+        server_name "{{env "CERT_DOMAIN"}}";
+
+        ssl_ciphers AES128-SHA:AES256-SHA:RC4-SHA:DES-CBC3-SHA:RC4-MD5;
+        ssl_session_cache shared:SSL:10m;
+        ssl_session_timeout 10m;
+        ssl_certificate /data/letsencrypt/live/{{env "CERT_DOMAIN"}}/fullchain.pem; 
+        ssl_certificate_key /data/letsencrypt/live/{{env "CERT_DOMAIN"}}/privkey.pem;
+
         root /var/www/default;
         index index.html;
+
+{{ range services }}
+  {{ if .Tags | contains "public" }}
+    {{ $service:=.Name }}
+    {{ range service $service "passing, warning" }}
+        location /{{.Name}} {
+            proxy_pass http://{{.Address}}:{{.Port}};
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+    {{ end }}
+  {{ end }}
+{{ end }}
+
     }
 }

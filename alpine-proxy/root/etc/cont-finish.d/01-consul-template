@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv sh
+
+echo "==> Disabling services configuration"
+touch /etc/services.d/consul-template/down

@@ -14,7 +14,7 @@ fi
 export CERT_DOMAIN
 printf "%s" "${CERT_DOMAIN}" > /var/run/s6/container_environment/CERT_DOMAIN
 
-if [ ! -d "/etc/letsencrypt/live/" ]; then
+if [ ! -d "/data/letsencrypt/live/" ]; then
     nginx -c /etc/nginx/nginx80.conf
     i=0
     success=0
@@ -22,7 +22,7 @@ if [ ! -d "/etc/letsencrypt/live/" ]; then
     do
        if curl --output /dev/null --silent --head --fail ${CERT_DOMAIN}; then
           echo "${CERT_DOMAIN} connection success"
-          certbot certonly --test-cert --no-self-upgrade --agree-tos --email ${CERT_EMAIL} --webroot -w /var/www/default -d ${CERT_DOMAIN}
+          certbot certonly --test-cert --text --non-interactive --no-self-upgrade --agree-tos --email ${CERT_EMAIL} --config-dir /data/letsencrypt --work-dir /data/letsencrypt --webroot -w /var/www/default -d ${CERT_DOMAIN}
           success=1
           break
        fi
@@ -40,3 +40,7 @@ if [ ! -d "/etc/letsencrypt/live/" ]; then
 fi
 
 sed -i -e "s/example.com/${CERT_DOMAIN}/g" /etc/nginx/nginx.conf
+
+SERVICE_CRON=1
+export SERVICE_CRON
+printf "%s" "${SERVICE_CRON}" > /var/run/s6/container_environment/SERVICE_CRON

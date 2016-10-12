@@ -1,3 +1,5 @@
 ;; folders
 log
-consul
+data
+backup
+letsencrypt
