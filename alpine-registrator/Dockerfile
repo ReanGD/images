@@ -2,7 +2,7 @@ FROM reangd/alpine-base:latest
 
 ENV CONSUL_IP="" \
     CONSUL_PORT="8500" \
-    REGISTRATOR_OPTIONS="-internal"
+    REGISTRATOR_OPTIONS="-internal -resync 1800"
 
 RUN REGISTRATOR_VER=7 && \
     apk add --no-cache go git gcc libc-dev && \

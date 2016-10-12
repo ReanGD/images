@@ -4,12 +4,19 @@ services:
     build: .
     restart: unless-stopped
     network_mode: "bridge"
+    container_name: registrator
     image: reangd/alpine-registrator:latest
     environment:
+      #
+      # base params:
+      #
       - S6_LOGGING=0
+      #
+      # base registrator:
+      #
       # - CONSUL_IP=1.2.3.4
       # - CONSUL_PORT=8500
-      - REGISTRATOR_OPTIONS=-internal -resync 600
+      # - REGISTRATOR_OPTIONS=-internal -resync 600
     volumes:
       # - ./log:/var/log:rw
       - /var/run/docker.sock:/tmp/docker.sock
