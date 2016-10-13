@@ -1,6 +1,6 @@
 version: '2'
 services:
-  jenkins:
+  dokuwiki:
     build: .
     restart: unless-stopped
     network_mode: "bridge"

@@ -1,6 +1,6 @@
 version: '2'
 services:
-  base:
+  registrator:
     build: .
     restart: unless-stopped
     network_mode: "bridge"
@@ -12,7 +12,7 @@ services:
       #
       - S6_LOGGING=0
       #
-      # base registrator:
+      # registrator registrator:
       #
       # - CONSUL_IP=1.2.3.4
       # - CONSUL_PORT=8500

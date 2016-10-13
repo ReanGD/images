@@ -1,6 +1,6 @@
 version: '2'
 services:
-  jenkins:
+  proxy:
     build: .
     restart: unless-stopped
     network_mode: "bridge"
@@ -28,6 +28,8 @@ services:
       - CERT_EMAIL=admin@example.com
       - CERT_DOMAIN=example.com
       # - CERT_PRODACTION=1
+      # - CONSUL_IP=1.2.3.4
+      # - CONSUL_PORT=8500
     ports:
       - "80:80"      # HTTP
       - "443:443"    # HTTPS

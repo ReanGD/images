@@ -21,6 +21,8 @@ docker run -it --rm -p 80:80 -p 443:443 --env="S6_LOGGING=0" --env="CERT_EMAIL=a
 * `CERT_EMAIL` (default = "admin@example.com"): email for letsencrypt
 * `CERT_DOMAIN` (default = "example.com"): domain
 * `CERT_PRODACTION` (default = ""): set 1 for create prodaction certificates
+* `CONSUL_IP` (default = ""): custom ip of the consul instance if different from CONTAINER_GATEWAY
+* `CONSUL_PORT` (default = "8500"): port of the consul instance
 
 
 ### Ports:
