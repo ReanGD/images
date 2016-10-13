@@ -6,7 +6,9 @@
  </head>
  <body>
 {{ range services }}
-  {{ if .Tags | contains "public" }}
+  {{ $is_public := .Tags | contains "public" }}
+  {{ $is_private := .Tags | contains "private" }}
+  {{ if or $is_public $is_private }}
     {{ $service:=.Name }}
     {{ range service $service "any" }}
       {{ if eq .Status "critical"}}
