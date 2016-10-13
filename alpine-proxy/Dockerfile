@@ -2,6 +2,7 @@ FROM reangd/alpine-nginx:latest
 
 ENV CERT_EMAIL="" \
     CERT_DOMAIN="" \
+    CERT_PRODACTION="" \
     CONSUL_IP="" \
     CONSUL_PORT="8500"
 

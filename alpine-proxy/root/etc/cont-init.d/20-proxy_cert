@@ -15,28 +15,12 @@ export CERT_DOMAIN
 printf "%s" "${CERT_DOMAIN}" > /var/run/s6/container_environment/CERT_DOMAIN
 
 if [ ! -d "/data/letsencrypt/live/" ]; then
-    nginx -c /etc/nginx/nginx80.conf
-    i=0
-    success=0
-    while [ "$i" -lt 10 ]
-    do
-       if curl --output /dev/null --silent --head --fail ${CERT_DOMAIN}; then
-          echo "${CERT_DOMAIN} connection success"
-          certbot certonly --test-cert --text --non-interactive --no-self-upgrade --agree-tos --email ${CERT_EMAIL} --config-dir /data/letsencrypt --work-dir /data/letsencrypt --webroot -w /var/www/default -d ${CERT_DOMAIN}
-          success=1
-          break
-       fi
-
-       echo "${CERT_DOMAIN} connection failed"
-       sleep 1
-       i=`expr $i + 1`
-    done
-    nginx -c /etc/nginx/nginx80.conf -s quit
-
-    if [ $success -eq 0 ]; then
-        echo "Nginx wait failed"
-        exit 1
-    fi
+  FLAGS=""
+  if [ -z ${CERT_PRODACTION} ]; then
+    echo "==> CERT_PRODACTION=false, use --test-cert"
+    FLAGS="--test-cert"
+  fi
+  certbot certonly ${FLAGS} --standalone --config /etc/cli.ini --email ${CERT_EMAIL} -d ${CERT_DOMAIN}
 fi
 
 sed -i -e "s/example.com/${CERT_DOMAIN}/g" /etc/nginx/nginx.conf

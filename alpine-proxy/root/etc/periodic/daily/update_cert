@@ -1,5 +1,3 @@
 #!/usr/bin/with-contenv sh
 
-if curl --output /dev/null --silent --head --fail ${CERT_DOMAIN}; then
-  /usr/bin/certbot renew --text --non-interactive --config-dir /data/letsencrypt --work-dir /data/letsencrypt --post-hook "nginx -s reload"
-fi
+/usr/bin/certbot renew  --config /etc/cli.ini --post-hook "nginx -s reload"
