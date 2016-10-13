@@ -3,23 +3,33 @@ services:
   jenkins:
     build: .
     restart: unless-stopped
-    image: reangd/alpine-jenkins:latest
     network_mode: "bridge"
+    container_name: jenkins
+    image: reangd/alpine-jenkins:latest
     environment:
+      #
+      # base params:
+      #
       - S6_LOGGING=0
-      # - JAVA_OPTS=...
-      # - JENKINS_OPTS=...
-      # 
-      # Registrator params:
-      # 
+      # - SERVICE_CRON=1
+      # - RESTORE_NAME=daily.0
+      #
+      # registrator params:
+      #
       - SERVICE_NAME=jenkins
-      - SERVICE_TAGS=local
+      - SERVICE_TAGS=private
       - SERVICE_CHECK_TCP=true
       - SERVICE_CHECK_INTERVAL=15s
       - SERVICE_CHECK_TIMEOUT=10s
-    ports:
-      - "80:8080"      # HTTP
+      #
+      # jenkins params:
+      #
+      # - JAVA_OPTS=...
+      # - JENKINS_OPTS=...
+    # ports:
+      # - "80:8080"      # HTTP
     volumes:
       # - ./log:/var/log:rw
-      # - ./jenkins:/jenkins:rw
+      # - ./backup:/backup:rw
+      # - ./data:/data:rw
       - /etc/localtime:/etc/localtime:ro

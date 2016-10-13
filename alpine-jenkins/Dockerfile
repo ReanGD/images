@@ -2,9 +2,9 @@ FROM reangd/alpine-base:latest
 
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk/jre \
     PATH=$PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin \
-    JENKINS_HOME=/jenkins \
+    JENKINS_HOME=/data \
     JAVA_OPTS="" \
-    JENKINS_OPTS=""
+    JENKINS_OPTS="--prefix=/jenkins"
 
 RUN JENKINS_VERSION=latest && \
     \
@@ -19,5 +19,4 @@ RUN JENKINS_VERSION=latest && \
     curl -sSL http://mirrors.jenkins-ci.org/war-stable/${JENKINS_VERSION}/jenkins.war -o /usr/share/jenkins/jenkins.war
 
 EXPOSE 8080
-VOLUME ["/jenkins"]
 COPY root /
