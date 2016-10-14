@@ -14,7 +14,7 @@
       {{ if eq .Status "critical"}}
       {{.Name}} (status: critical)
       {{ else }}
-<p><a href="{{.Name}}">{{.Name}}</a></p>
+<p><a href="/{{.Name}}/">{{.Name}}</a></p>
       {{ end }}
     {{ end }}
   {{ end }}
