@@ -1,0 +1,44 @@
+#!/usr/bin/with-contenv sh
+
+if [ ! -d "/data/extensions" ]; then
+	cp -rp /origin/extensions /data/
+fi
+
+if [ ! -d "/data/db" ]; then
+	mkdir -p /data/db
+	chown nobody:nobody /data/db
+	s6-setuidgid nobody php /www/mediawiki/maintenance/install.php \
+		--dbname db \
+		--dbpath /data/db \
+		--dbtype sqlite \
+		--server "http://127.0.0.1" \
+		--pass qweqweqwe \
+		--wiki root \
+		--scriptpath /mediawiki \
+		w admin
+
+	sed -i -e "s/\$wgEnableEmail = true/\$wgEnableEmail = false/g" /www/mediawiki/LocalSettings.php
+
+	## Shared memory settings	
+	sed -i -e "/\$wgMainCacheType/d" /www/mediawiki/LocalSettings.php
+	sed -i -e "/\$wgMemCachedServers/d" /www/mediawiki/LocalSettings.php
+
+	## To enable image uploads, make sure the 'images' directory
+	## is writable, then set this to true:
+	sed -i -e "/\$wgEnableUploads/d" /www/mediawiki/LocalSettings.php
+	sed -i -e "/\$wgUseImageMagick/d" /www/mediawiki/LocalSettings.php
+	sed -i -e "/\$wgImageMagickConvertCommand/d" /www/mediawiki/LocalSettings.php
+
+	sed -i -e "s/\"en\"/\"ru\"/g" /www/mediawiki/LocalSettings.php
+	echo "require_once(\"settings.php\");" >> /www/mediawiki/LocalSettings.php
+
+	mv /www/mediawiki/LocalSettings.php /data/
+fi
+
+if [ ! -f /data/settings.php ]; then
+	cp /origin/settings.php /data/
+	chown nobody:nobody /data/settings.php
+	chmod 666 /data/settings.php
+fi
+
+ln -s /data/LocalSettings.php /www/mediawiki/LocalSettings.php
