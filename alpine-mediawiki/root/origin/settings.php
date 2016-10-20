@@ -1,9 +1,5 @@
 <?php
 
-## Shared memory settings
-$wgMainCacheType = CACHE_MEMCACHED;
-$wgMemCachedServers = [ '127.0.0.1:11211' ];
-
 ## To enable image uploads, make sure the 'images' directory
 ## is writable, then set this to true:
 $wgEnableUploads = true;
@@ -20,26 +16,53 @@ if ( $_SERVER['REMOTE_ADDR'] == '127.0.0.1' ) {
 	$wgGroupPermissions['*']['read'] = false;
 }
 
-# Cache
+############## Optimize ##############
 // Отключение показов страниц счетчики.
 $wgDisableCounters = true;
+$wgMainCacheType = CACHE_ACCEL;
+$wgMessageCacheType = CACHE_ACCEL;
+// $wgMemCachedServers = [ '127.0.0.1:11211' ];
 
-// $wgMainCacheType = CACHE_ACCEL;
-// $wgMessageCacheType = CACHE_ACCEL;
-// $wgCacheDirectory = '<SOME DIRECTORY>';
+// # Text cache
+// включение может вызывать проблемы (see https://www.mediawiki.org/wiki/Manual:$wgCompressRevisions)
+$wgCompressRevisions = false; 
+$wgRevisionCacheExpiry = 3 * 24 * 60 * 60; // 3 days
+$wgParserCacheExpireTime = 60 * 24 * 60 * 60; // 60 days
+$wgParserCacheType = CACHE_DB;
+
+$wgResourceLoaderMaxage = array(
+	'versioned' => array(
+		// Squid/Varnish but also any other public proxy cache between the client and MediaWiki
+		'server' => 60 * 24 * 60 * 60, // 60 days
+		// On the client side (e.g. in the browser cache).
+		'client' => 60 * 24 * 60 * 60, // 60 days
+	),
+	'unversioned' => array(
+		'server' => 60 * 24 * 60 * 60, // 60 days
+		'client' => 60 * 24 * 60 * 60, // 60 days
+	),
+);
+
+$wgCacheDirectory = '/data/cache';
+
+// Файловый кеш работает только для неавторизированных пользователей
+$wgUseFileCache = false;
+// $wgFileCacheDirectory = '/data/fcache';
+
+// Кеширование ссылок в боковой панели навигации
+$wgEnableSidebarCache = true;
+
+// --------------------------
 // $wgUseLocalMessageCache = true;
-// $wgParserCacheType = CACHE_ACCEL;
-// $wgMemCachedServers = array();
 // $wgUseGzip = true;
-// $wgEnableSidebarCache = true;
+
+// $wgShowIPinHeader = false;
 
 // # NO DB HITS!
 // $wgMiserMode = true;
+// --------------------------
 
-// # Text cache
-// $wgCompressRevisions = true; // use with care (see talk page)
-// $wgRevisionCacheExpiry = 3*24*3600;
-// $wgParserCacheExpireTime = 14*24*3600;
+
 
 // # Diffs (defaults seem ok for Ubuntu and others)
 // $wgDiff = 'C:/Server/xampp/htdocs/MW/bin/GnuWin32/bin/diff.exe';
@@ -60,7 +83,7 @@ $wgDefaultUserOptions['wikieditor-publish'] = 1;
 
 
 ############## VisualEditor ##############
-wfLoadExtension( 'VisualEditor' );
+// wfLoadExtension( 'VisualEditor' );
 // Расширение включено по умолчанию для всех
 $wgDefaultUserOptions['visualeditor-enable'] = 1;
 // Показывать окно приветствия

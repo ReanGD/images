@@ -35,6 +35,12 @@ if [ ! -d "/data/db" ]; then
 	mv /www/mediawiki/LocalSettings.php /data/
 fi
 
+if [ ! -d "/data/cache" ]; then
+	mkdir -p /data/cache
+	chown nobody:nobody /data/cache
+	chmod 755 /data/cache
+fi
+
 if [ ! -f /data/settings.php ]; then
 	cp /origin/settings.php /data/
 	chown nobody:nobody /data/settings.php

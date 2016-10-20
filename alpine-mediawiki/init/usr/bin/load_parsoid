@@ -1,0 +1,12 @@
+#!/bin/sh
+
+git clone --recursive --depth=1 https://gerrit.wikimedia.org/r/p/mediawiki/services/parsoid/deploy /usr/parsoid
+rm -rf /usr/parsoid/.git
+find /usr/parsoid -type d -name test -exec rm -r "{}" +
+find /usr/parsoid -type d -name tests -exec rm -r "{}" +
+find /usr/parsoid -type d -name samples -exec rm -r "{}" +
+find /usr/parsoid -type d -name examples -exec rm -r "{}" +
+find /usr/parsoid -type d -name docs -exec rm -r "{}" +
+find /usr/parsoid -type f -name \*.md -delete
+find /usr/parsoid -type f -name \*.py -delete
+find /usr/parsoid -type f -name LICENSE -delete
