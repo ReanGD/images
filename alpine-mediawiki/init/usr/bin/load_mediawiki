@@ -11,7 +11,7 @@ mv /tmp/${MEDIAWIKI_FILE}/ /www/mediawiki
 
 
 # download extensions
-# curl -sSL https://extdist.wmflabs.org/dist/extensions/${VISUAL_EDITOR}.tar.gz | tar xz -C /www/mediawiki/extensions
+curl -sSL https://extdist.wmflabs.org/dist/extensions/${VISUAL_EDITOR}.tar.gz | tar xz -C /www/mediawiki/extensions
 
 
 # clear

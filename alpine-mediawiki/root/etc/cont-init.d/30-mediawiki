@@ -41,7 +41,7 @@ if [ ! -d "/data/cache" ]; then
 	chmod 755 /data/cache
 fi
 
-if [ ! -f /data/settings.php ]; then
+if [ ! -f "/data/settings.php" ]; then
 	cp /origin/settings.php /data/
 	chown nobody:nobody /data/settings.php
 	chmod 666 /data/settings.php

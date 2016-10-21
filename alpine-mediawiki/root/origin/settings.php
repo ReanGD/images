@@ -6,6 +6,9 @@ $wgEnableUploads = true;
 #$wgUseImageMagick = true;
 #$wgImageMagickConvertCommand = "/usr/bin/convert";
 
+$wgDiff = '/usr/bin/diff';
+$wgDiff3 = '/usr/bin/diff3';
+
 # The following permissions were set based on your choice in the installer
 $wgGroupPermissions['*']['createaccount'] = false;
 if ( $_SERVER['REMOTE_ADDR'] == '127.0.0.1' ) {
@@ -15,20 +18,31 @@ if ( $_SERVER['REMOTE_ADDR'] == '127.0.0.1' ) {
 	$wgGroupPermissions['*']['edit'] = false;
 	$wgGroupPermissions['*']['read'] = false;
 }
+// $wgGroupPermissions['*']['read'] = true;
 
 ############## Optimize ##############
+
+$wgMainCacheType = CACHE_ACCEL;
+$wgMemCachedServers = array();
+$wgMessageCacheType = CACHE_ACCEL;
+$wgUseLocalMessageCache = true;
+// Он слишком большой, поэтому может часто вытеснятся, лучше положить в BD
+$wgParserCacheType = CACHE_DB;
+$wgParserCacheExpireTime = 60 * 24 * 60 * 60; // 60 days
+// Файловый кеш работает только для неавторизированных пользователей
+$wgUseFileCache = false;
+$wgFileCacheDirectory = '/data/cache';
+
 // Отключение показов страниц счетчики.
 $wgDisableCounters = true;
-$wgMainCacheType = CACHE_ACCEL;
-$wgMessageCacheType = CACHE_ACCEL;
-// $wgMemCachedServers = [ '127.0.0.1:11211' ];
+
+// Отключение счетчиков популярных страниц и т.п.
+$wgMiserMode = true;
 
 // # Text cache
 // включение может вызывать проблемы (see https://www.mediawiki.org/wiki/Manual:$wgCompressRevisions)
 $wgCompressRevisions = false; 
 $wgRevisionCacheExpiry = 3 * 24 * 60 * 60; // 3 days
-$wgParserCacheExpireTime = 60 * 24 * 60 * 60; // 60 days
-$wgParserCacheType = CACHE_DB;
 
 $wgResourceLoaderMaxage = array(
 	'versioned' => array(
@@ -45,28 +59,9 @@ $wgResourceLoaderMaxage = array(
 
 $wgCacheDirectory = '/data/cache';
 
-// Файловый кеш работает только для неавторизированных пользователей
-$wgUseFileCache = false;
-// $wgFileCacheDirectory = '/data/fcache';
-
 // Кеширование ссылок в боковой панели навигации
 $wgEnableSidebarCache = true;
 
-// --------------------------
-// $wgUseLocalMessageCache = true;
-// $wgUseGzip = true;
-
-// $wgShowIPinHeader = false;
-
-// # NO DB HITS!
-// $wgMiserMode = true;
-// --------------------------
-
-
-
-// # Diffs (defaults seem ok for Ubuntu and others)
-// $wgDiff = 'C:/Server/xampp/htdocs/MW/bin/GnuWin32/bin/diff.exe';
-// $wgDiff3 = 'C:/Server/xampp/htdocs/MW/bin/GnuWin32/bin/diff3.exe';
 
 # Extensions
 
@@ -83,11 +78,11 @@ $wgDefaultUserOptions['wikieditor-publish'] = 1;
 
 
 ############## VisualEditor ##############
-// wfLoadExtension( 'VisualEditor' );
+wfLoadExtension( 'VisualEditor' );
 // Расширение включено по умолчанию для всех
 $wgDefaultUserOptions['visualeditor-enable'] = 1;
 // Показывать окно приветствия
-$wgVisualEditorShowBetaWelcome = false;
+// $wgVisualEditorShowBetaWelcome = false;
 
 // Optional: Set VisualEditor as the default for anonymous users
 // otherwise they will have to switch to VE
@@ -107,6 +102,7 @@ $wgVirtualRestConfig['modules']['parsoid'] = array(
         // Parsoid "prefix" (optional)
         // 'prefix' => 'wiki'
 );
+$wgVirtualRestConfig['modules']['parsoid']['forwardCookies'] = false;
 
 ############## Other ##############
 wfLoadExtension( 'InputBox' );
