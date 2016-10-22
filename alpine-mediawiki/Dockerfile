@@ -1,6 +1,8 @@
 FROM reangd/alpine-nginx:latest
 
-RUN apk add --no-cache diffutils git nodejs \
+RUN addgroup parsoid && \
+    adduser -D -H -g "" -G parsoid -s /sbin/nologin parsoid && \
+    apk add --no-cache diffutils git nodejs \
     php5-pdo php5-pdo_sqlite php5-xcache \
     php5-fpm php5-curl php5-ctype php5-gd php5-openssl \
     php5-xml php5-json php5-iconv php5-ctype php5-zlib \

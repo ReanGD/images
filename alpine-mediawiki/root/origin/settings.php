@@ -82,7 +82,7 @@ wfLoadExtension( 'VisualEditor' );
 // Расширение включено по умолчанию для всех
 $wgDefaultUserOptions['visualeditor-enable'] = 1;
 // Показывать окно приветствия
-// $wgVisualEditorShowBetaWelcome = false;
+$wgVisualEditorShowBetaWelcome = false;
 
 // Optional: Set VisualEditor as the default for anonymous users
 // otherwise they will have to switch to VE
