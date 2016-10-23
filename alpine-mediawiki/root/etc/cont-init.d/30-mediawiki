@@ -2,6 +2,7 @@
 
 if [ ! -d "/data/extensions" ]; then
 	cp -rp /origin/extensions /data/
+	chown -R nobody:www-data /data/extensions
 fi
 
 if [ ! -d "/data/db" ]; then

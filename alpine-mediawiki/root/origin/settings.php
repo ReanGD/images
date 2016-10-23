@@ -19,7 +19,7 @@ if ( $_SERVER['REMOTE_ADDR'] == '127.0.0.1' ) {
 	$wgGroupPermissions['*']['read'] = false;
 }
 // $wgGroupPermissions['*']['read'] = true;
-
+// $wgGroupPermissions['*']['edit'] = true;
 ############## Optimize ##############
 
 $wgMainCacheType = CACHE_ACCEL;
@@ -104,6 +104,7 @@ $wgVirtualRestConfig['modules']['parsoid'] = array(
 );
 $wgVirtualRestConfig['modules']['parsoid']['forwardCookies'] = false;
 
-############## Other ##############
+############## Other Extensions ##############
+require_once('/www/mediawiki/extensions/MMHandler/MMHandler.php');
 wfLoadExtension( 'InputBox' );
 wfLoadExtension( 'SyntaxHighlight_GeSHi' );
