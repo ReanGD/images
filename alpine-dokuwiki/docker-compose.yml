@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     network_mode: "bridge"
     container_name: dokuwiki
+    hostname: dokuwiki
     image: reangd/alpine-dokuwiki:latest
     environment:
       #

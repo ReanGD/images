@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     network_mode: "bridge"
     container_name: consul
+    hostname: consul
     image: reangd/alpine-consul:latest
     environment:
       #
