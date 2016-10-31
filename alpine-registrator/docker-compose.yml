@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     network_mode: "bridge"
     container_name: registrator
+    hostname: registrator
     image: reangd/alpine-registrator:latest
     environment:
       #

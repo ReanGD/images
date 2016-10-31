@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     network_mode: "bridge"
     container_name: proxy
+    hostname: proxy
     image: reangd/alpine-proxy:latest
     environment:
       #

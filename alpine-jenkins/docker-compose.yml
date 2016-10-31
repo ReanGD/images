@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     network_mode: "bridge"
     container_name: jenkins
+    hostname: jenkins
     image: reangd/alpine-jenkins:latest
     environment:
       #
