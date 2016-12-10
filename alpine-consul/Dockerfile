@@ -2,7 +2,7 @@ FROM reangd/alpine-base:latest
 
 ENV CONSUL_OPTIONS="-server -bootstrap -client 0.0.0.0 -ui"
 
-RUN CONSUL_VERSION=0.7.0 && \
+RUN CONSUL_VERSION=0.7.5 && \
     CONSUL_BASE_PATH=https://releases.hashicorp.com/consul/${CONSUL_VERSION} && \
     \
     mkdir -p /consul/ui && \
