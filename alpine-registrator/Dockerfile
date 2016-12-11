@@ -6,6 +6,7 @@ ENV CONSUL_IP="" \
 
 RUN REGISTRATOR_VER=7 && \
     apk add --no-cache go git gcc libc-dev && \
+    git config --global http.https://gopkg.in.followRedirects true && \
     mkdir -p /tmp/src/github.com/gliderlabs/ && \
     curl -sSL https://github.com/gliderlabs/registrator/archive/v${REGISTRATOR_VER}.tar.gz | tar xz -C /tmp/src/github.com/gliderlabs/ && \
     cd /tmp/src/github.com/gliderlabs/registrator-${REGISTRATOR_VER} && \
