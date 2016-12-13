@@ -6,7 +6,7 @@ ENV CERT_EMAIL="" \
     CONSUL_IP="" \
     CONSUL_PORT="8500"
 
-RUN CONSULTEMPLATE_VERSION=0.15.0 && \
+RUN CONSULTEMPLATE_VERSION=0.18.1 && \
     CONSULTEMPLATE_BASE_PATH=https://releases.hashicorp.com/consul-template/${CONSULTEMPLATE_VERSION} && \
     \
     apk add --no-cache certbot gnupg && \
