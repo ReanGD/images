@@ -9,6 +9,7 @@ reangd/alpine-jenkins:latest
 ### Example:
 ```
 docker run -it --rm -p 80:8080 --env="S6_LOGGING=0" reangd/alpine-jenkins:latest /bin/bash
+docker run --rm --env="S6_LOGGING=0" --env="RESTORE_NAME=weekly.0" -v /home/rean/docker/data/jenkins:/data -v /net/backup/jenkins:/backup reangd/alpine-jenkins:latest
 ```
 
 And open http://127.0.0.1/jenkins/
