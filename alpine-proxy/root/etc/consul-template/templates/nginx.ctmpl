@@ -50,7 +50,7 @@ http {
   {{ $is_private := .Tags | contains "private" }}
   {{ if or $is_public $is_private }}
     {{ $service:=.Name }}
-    {{ range service $service "passing, warning" }}
+    {{ range service $service "passing,warning" }}
         location /{{.Name}} {
             proxy_pass http://{{.Address}}:{{.Port}};
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -83,7 +83,7 @@ http {
   {{ $is_public := .Tags | contains "public" }}
   {{ if $is_public }}
     {{ $service:=.Name }}
-    {{ range service $service "passing, warning" }}
+    {{ range service $service "passing,warning" }}
         location /{{.Name}} {
             proxy_pass http://{{.Address}}:{{.Port}};
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
