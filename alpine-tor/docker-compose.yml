@@ -1,0 +1,28 @@
+version: '2'
+services:
+  tor:
+    build:
+    restart: unless-stopped
+    network_mode: "bridge"
+    container_name: tor
+    hostname: tor
+    image: reangd/alpine-tor:latest
+    environment:
+      #
+      # base params:
+      #
+      - S6_LOGGING=0
+      - SERVICE_CRON=0
+      #
+      # registrator params:
+      #
+      - SERVICE_NAME=tor
+      - SERVICE_TAGS=private
+      - SERVICE_CHECK_TCP=true
+      - SERVICE_CHECK_INTERVAL=15s
+      - SERVICE_CHECK_TIMEOUT=10s
+    ports:
+      - "9050:9050"
+    volumes:
+      # - ./log:/var/log:rw
+      - /etc/localtime:/etc/localtime:ro
