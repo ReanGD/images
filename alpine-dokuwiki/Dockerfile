@@ -2,11 +2,11 @@ FROM reangd/alpine-nginx:latest
 
 RUN DOKUWIKI_VERSION="2017-02-19a" && \
     apk add --no-cache \
-        php5-fpm php5-cgi php5-json php5-gd \
-        php5-zip php5-xml php5-zlib php5-openssl \
-        php5-pdo_sqlite php5-sqlite3 && \
+        php7-fpm php7-cgi php7-json php7-gd \
+        php7-zip php7-xml php7-zlib php7-openssl \
+        php7-pdo_sqlite php7-sqlite3 && \
     \
-    sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php5/php.ini && \
+    sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php7/php.ini && \
     curl -sSL http://download.dokuwiki.org/src/dokuwiki/dokuwiki-${DOKUWIKI_VERSION}.tgz | tar xz -C /tmp && \
     mkdir /www && \
     mv /tmp/dokuwiki-${DOKUWIKI_VERSION}/ /www/dokuwiki && \
