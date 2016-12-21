@@ -17,7 +17,7 @@ services:
       # registrator params:
       #
       - SERVICE_NAME=tor
-      - SERVICE_TAGS=private
+      - SERVICE_TAGS=hide
       - SERVICE_CHECK_TCP=true
       - SERVICE_CHECK_INTERVAL=15s
       - SERVICE_CHECK_TIMEOUT=10s
