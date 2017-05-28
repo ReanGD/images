@@ -1,3 +1,3 @@
 #!/usr/bin/with-contenv sh
 
-/usr/bin/certbot renew  --config /etc/cli.ini --post-hook "nginx -s reload"
+# /usr/bin/certbot renew  --config /etc/cli.ini --post-hook "nginx -s reload"
