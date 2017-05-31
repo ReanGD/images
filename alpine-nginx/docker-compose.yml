@@ -12,15 +12,6 @@ services:
       #
       - S6_LOGGING=0
       #
-      # registrator params:
-      #
-      # - SERVICE_443_IGNORE=true
-      - SERVICE_80_NAME=nginx
-      - SERVICE_80_TAGS=public
-      - SERVICE_80_CHECK_TCP=true
-      - SERVICE_80_CHECK_INTERVAL=15s
-      - SERVICE_80_CHECK_TIMEOUT=10s
-      #
       # nginx params:
       #
       # - NGINX_OPTIONS=...

@@ -16,14 +16,6 @@ services:
       # - RESTORE_NAME=daily.0
       # - NGINX_OPTIONS=...
       #
-      # registrator params:
-      #
-      - SERVICE_NAME=proxy
-      - SERVICE_TAGS=
-      - SERVICE_CHECK_TCP=true
-      - SERVICE_CHECK_INTERVAL=15s
-      - SERVICE_CHECK_TIMEOUT=10s
-      #
       # proxy params:
       #
       - CERT_EMAIL=admin@example.com
