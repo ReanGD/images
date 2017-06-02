@@ -14,16 +14,43 @@ fi
 export CERT_DOMAIN
 printf "%s" "${CERT_DOMAIN}" > /var/run/s6/container_environment/CERT_DOMAIN
 
-if [ ! -d "/data/letsencrypt/live/" ]; then
-  FLAGS=""
-  if [ -z ${CERT_PRODACTION} ]; then
-    echo "==> CERT_PRODACTION=false, use --test-cert"
-    FLAGS="--test-cert"
-  fi
-  certbot certonly ${FLAGS} --standalone --config /etc/cli.ini --email ${CERT_EMAIL} -d ${CERT_DOMAIN}
-fi
-
 sed -i -e "s/example.com/${CERT_DOMAIN}/g" /etc/nginx/nginx.conf
+sed -i -e "s/example.com/${CERT_DOMAIN}/g" /etc/nginx/nginx_no_ssl.conf
+
+if [ ! -d "/data/certificates/" ]; then
+  i=0
+  nginx_wait_success=0
+  echo "start nginx with /etc/nginx/nginx_no_ssl.conf"
+  nginx -c /etc/nginx/nginx_no_ssl.conf &
+
+  while [ "$i" -lt 10 ]
+  do
+    echo "start check ${CERT_DOMAIN}"
+    if curl --output /dev/null --silent --head --fail ${CERT_DOMAIN}; then
+      echo "${CERT_DOMAIN} connection success"
+      
+      /usr/bin/lego_run
+      exit_status=$?
+      if [ $exit_status -ne 0 ]; then
+        exit 1
+      fi
+
+      nginx_wait_success=1
+      break
+    fi
+
+    echo "${CERT_DOMAIN} connection failed"
+    sleep 1
+    i=`expr $i + 1`
+  done
+
+  nginx -c /etc/nginx/nginx_no_ssl.conf -s quit
+  if [ $nginx_wait_success -eq 0 ]; then
+    echo "Nginx wait failed"
+    exit 1
+  fi
+  
+fi
 
 SERVICE_CRON=1
 export SERVICE_CRON

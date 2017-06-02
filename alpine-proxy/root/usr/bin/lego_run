@@ -1,0 +1,17 @@
+#!/usr/bin/with-contenv sh
+
+FLAGS=""
+if [ -z ${CERT_PRODACTION} ]; then
+  echo "==> CERT_PRODACTION=false, use test letsencrypt server"
+  FLAGS="--server=https://acme-staging.api.letsencrypt.org/directory"
+fi
+
+lego ${FLAGS} --email=${CERT_EMAIL} --domains=${CERT_DOMAIN} --accept-tos --path=/data --webroot=/var/www/ run
+lego_exit_status=$?
+if [ $lego_exit_status -eq 0 ]
+then
+  echo "==> Success generated ssl sertificate"
+else
+  echo "==> Can not create ssl sertificate"
+  exit 1
+fi

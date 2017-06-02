@@ -2,8 +2,7 @@ version: '2'
 services:
   proxy:
     build: .
-    restart: unless-stopped
-    network_mode: "bridge"
+    # restart: unless-stopped
     container_name: proxy
     hostname: proxy
     image: reangd/alpine-proxy:latest
@@ -22,10 +21,20 @@ services:
       - CERT_DOMAIN=example.com
       # - CERT_PRODACTION=1
     ports:
-      - "80:80"      # HTTP
+      # - "80:80"      # HTTP
       - "443:443"    # HTTPS
+    networks:
+      base:
+        ipv4_address: 10.10.0.2
     volumes:
       # - ./log:/var/log:rw
       # - ./backup:/backup:rw
       # - ./data:/data:rw
       - /etc/localtime:/etc/localtime:ro
+networks:
+  base:
+    driver: bridge
+    ipam:
+     config:
+        - subnet: 10.10.0.0/16
+          gateway: 10.10.0.1
