@@ -1,3 +1,0 @@
-#!/usr/bin/with-contenv sh
-
-exec s6-setuidgid parsoid /usr/bin/node /usr/parsoid/src/bin/server.js -n 1 --config /etc/parsoid/config.yaml >/var/log/parsoid.log 2>&1
