@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:3.6
 
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
     S6_LOGGING=1 \
@@ -12,7 +12,7 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
 
 RUN S6_OVERLAY_VERSION=v1.19.1.1 && \
     echo $TZ > /etc/timezone && \
-    apk add --no-cache bash bind-tools ca-certificates curl jq rsnapshot && \
+    apk add --no-cache bash ca-certificates curl rsnapshot && \
     rm -f /etc/rsnapshot.conf.default && \
     curl -sSL https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz | tar xz -C /
 
