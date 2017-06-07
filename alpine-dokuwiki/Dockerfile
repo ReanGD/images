@@ -10,9 +10,9 @@ RUN DOKUWIKI_VERSION="2017-02-19b" && \
     curl -sSL http://download.dokuwiki.org/src/dokuwiki/dokuwiki-${DOKUWIKI_VERSION}.tgz | tar xz -C /tmp && \
     mkdir /www && \
     mv /tmp/dokuwiki-${DOKUWIKI_VERSION}/ /www/dokuwiki && \
-    chown -R nobody:www-data /www && \
-    chmod -R 644 /www && \
-    find /www -type d -exec chmod 0755 {} ';' && \
+    chown -R nobody:www-data /www/ && \
+    chmod -R 644 /www/ && \
+    find /www/ -type d -exec chmod 0755 {} ';' && \
     \
     mkdir -p /origin/lib && \
     cp -rp /www/dokuwiki/data /origin/ && \

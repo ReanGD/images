@@ -8,9 +8,9 @@ add_dir () {
     if [ ! -d "/data/$1" ]; then
         cp -rp /origin/$1 /data/$2
     fi
-    chown -R nobody:www-data /www/dokuwiki/$1
-    chmod -R 644 /www/dokuwiki/$1
-    find /www/dokuwiki/$1 -type d -exec chmod 0755 {} ';'
+    chown -R nobody:www-data /www/dokuwiki/$1/
+    chmod -R 644 /www/dokuwiki/$1/
+    find /www/dokuwiki/$1/ -type d -exec chmod 0755 {} ';'
 }
 
 add_dir "data" ""
