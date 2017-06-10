@@ -1,6 +1,6 @@
 FROM reangd/alpine-nginx:latest
 
-RUN DOKUWIKI_VERSION="2017-02-19d" && \
+RUN DOKUWIKI_VERSION="2017-02-19e" && \
     apk add --no-cache \
         php7-openssl php7-fpm php7-json php7-gd  \
         php7-session php7-zip php7-zlib php7-cgi \
