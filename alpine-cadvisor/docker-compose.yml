@@ -1,0 +1,27 @@
+version: '2'
+services:
+  jenkins:
+    build: .
+    # restart: unless-stopped
+    network_mode: "bridge"
+    container_name: cadvisor
+    image: reangd/alpine-cadvisor:latest
+    environment:
+      #
+      # base params:
+      #
+      - S6_LOGGING=0
+      #
+      # cadvisor params:
+      #
+      # - CADVISOR_OPTIONS=-log_dir /var/log/
+    ports:
+      - "8080:8080"      # HTTP
+    volumes:
+      # - ./log:/var/log:rw
+      - /etc/localtime:/etc/localtime:ro
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
