@@ -1,4 +1,0 @@
-#!/usr/bin/with-contenv sh
-
-cd /usr/share/jenkins
-exec s6-setuidgid jenkins /usr/bin/java ${JAVA_OPTS} -jar /usr/share/jenkins/jenkins.war ${JENKINS_OPTS}
