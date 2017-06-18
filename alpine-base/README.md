@@ -14,7 +14,7 @@ docker run --rm --env="S6_LOGGING=0" --env="RESTORE_NAME=daily.0" -v /home/rean/
 
 
 ### Customizing:
-* `TZ` (defaul = Europe/Moscow): timezone
+* `TIME_ZONE` (defaul = Europe/Moscow): timezone
 * `S6_LOGGING` (default = 1):
   * **`0`**: Outputs everything to stdout/stderr.
   * **`1`**: Uses an internal `catch-all` logger and persists everything on it, it is located in `/var/log/s6-uncaught-logs`. Nothing would be written to stdout/stderr.
