@@ -1,0 +1,22 @@
+version: '2'
+services:
+  sync:
+    build: .
+    restart: unless-stopped
+    network_mode: "bridge"
+    container_name: sync
+    image: reangd/alpine-sync:latest
+    environment:
+      #
+      # base params:
+      #
+      - S6_LOGGING=0
+      # - SERVICE_CRON=1
+    ports:
+      - "80:80"      # HTTP
+    volumes:
+      # - ./log:/var/log:rw
+      # - ./backup:/backup:rw
+      # - ./data:/data:rw
+      # - ./storage:/storage:rw
+      - /etc/localtime:/etc/localtime:ro
