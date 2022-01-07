@@ -17,6 +17,8 @@ set -o pipefail
 flags=("-D" "$POSTGRESQL_DATA_DIR" "--config-file=$POSTGRESQL_CONF_FILE" "--external_pid_file=$POSTGRESQL_PID_FILE" "--hba_file=$POSTGRESQL_PGHBA_FILE")
 cmd=$(command -v postgres)
 
+/opt/scripts/walg-run.sh
+
 info "** Starting PostgreSQL **"
 if am_i_root; then
     exec gosu "$POSTGRESQL_DAEMON_USER" "$cmd" "${flags[@]}"

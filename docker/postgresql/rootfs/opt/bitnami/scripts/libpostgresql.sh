@@ -294,6 +294,7 @@ EOF
 postgresql_restrict_pghba() {
     if [[ -n "$POSTGRESQL_PASSWORD" ]]; then
         replace_in_file "$POSTGRESQL_PGHBA_FILE" "trust" "md5" false
+        replace_in_file "$POSTGRESQL_PGHBA_FILE" "local    all             all                                     md5" "local    all             all                                     trust" false
     fi
 }
 
@@ -380,9 +381,9 @@ postgresql_configure_replication_parameters() {
 
 postgresql_configure_archive_parameters() {
     postgresql_set_property "archive_mode" "on"
-    postgresql_set_property "archive_command" "'/opt/bitnami/wal-g/bin wal-push \"%p\" >> $POSTGRESQL_LOG_DIR/archive_command.log 2>&1' "
     postgresql_set_property "archive_timeout" "$POSTGRESQL_ARCHIVE_TIMEOUT"
-    postgresql_set_property "restore_command" "'/opt/bitnami/wal-g/bin wal-fetch \"%f\" \"%p\" >> $POSTGRESQL_LOG_DIR/restore_command.log 2>&1' "
+    postgresql_set_property "archive_command" "/opt/bitnami/wal-g/bin/wal-g wal-push \"%p\" --config /.walg.json >> $POSTGRESQL_LOG_DIR/archive_command.log 2>\&1"
+    postgresql_set_property "restore_command" "/opt/bitnami/wal-g/bin/wal-g wal-fetch \"%f\" \"%p\" --config /.walg.json >> $POSTGRESQL_LOG_DIR/restore_command.log 2>\&1"
 }
 
 ########################
