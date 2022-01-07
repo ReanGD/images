@@ -1,3 +1,0 @@
-#!/usr/bin/with-contenv sh
-
-rslsync --nodaemon --log /var/log/sync.log --config /data/sync.conf

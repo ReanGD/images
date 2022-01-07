@@ -1,3 +1,0 @@
-#!/usr/bin/with-contenv sh
-
-[ ! -f /data/sync.conf ] && cp /etc/sync.conf.default /data/sync.conf
