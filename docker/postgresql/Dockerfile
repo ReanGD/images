@@ -33,7 +33,7 @@ ENV BITNAMI_APP_NAME="postgresql" \
 
 RUN /opt/scripts/walg-postunpack.sh
 
-USER 1000
+USER runner
 VOLUME [ "/bitnami/postgresql", "/backup", "/docker-entrypoint-initdb.d", "/docker-entrypoint-preinitdb.d" ]
 ENTRYPOINT [ "/opt/bitnami/scripts/postgresql/entrypoint.sh" ]
 CMD [ "/opt/bitnami/scripts/postgresql/run.sh" ]

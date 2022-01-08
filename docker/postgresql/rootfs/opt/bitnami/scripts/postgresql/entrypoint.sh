@@ -29,5 +29,4 @@ if [[ "$*" = *"/opt/bitnami/scripts/postgresql/run.sh"* ]]; then
     info "** Wal-g setup  finished! **"
 fi
 
-echo ""
 exec "$@"
