@@ -18,11 +18,11 @@ RUN install_packages acl ca-certificates curl gzip libbsd0 libbz2-1.0 libc6 libe
     localedef -c -f UTF-8 -i en_US en_US.UTF-8 && \
     update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales && \
-    echo 'en_GB.UTF-8 UTF-8' >> /etc/locale.gen && \
     echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && \
+    echo 'ru_RU.UTF-8 UTF-8' >> /etc/locale.gen && \
     locale-gen
 
-COPY rootfs /
+COPY --chown=1000 rootfs /
 RUN /opt/bitnami/scripts/postgresql/postunpack.sh && \
     /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="postgresql" \
