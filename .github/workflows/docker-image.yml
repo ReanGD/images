@@ -9,6 +9,8 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    env:
+      CONTEXT_SUBDIR: docker/postgresql/
     steps:
       - name: Login to DockerHub
         uses: docker/login-action@v1 
@@ -19,6 +21,6 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: ./docker/postgresql/
+          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:${{ env.CONTEXT_SUBDIR }}"
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/postgresql:14.1.0
