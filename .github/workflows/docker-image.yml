@@ -19,6 +19,6 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: docker/postgresql
+          context: ./docker/postgresql/
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/postgresql:14.1.0
