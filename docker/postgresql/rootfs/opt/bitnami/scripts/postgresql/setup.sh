@@ -27,6 +27,8 @@ am_i_root && ensure_user_exists "$POSTGRESQL_DAEMON_USER" --group "$POSTGRESQL_D
 am_i_root && chmod o+w "$(readlink /dev/stdout)"
 # Allow running custom pre-initialization scripts
 postgresql_custom_pre_init_scripts
+# wal-g setup
+. /opt/scripts/walg-setup.sh
 # Ensure PostgreSQL is initialized
 postgresql_initialize
 # Allow running custom initialization scripts

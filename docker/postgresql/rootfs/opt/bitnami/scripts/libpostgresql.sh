@@ -377,9 +377,8 @@ postgresql_configure_replication_parameters() {
         postgresql_set_property "wal_keep_segments" "12"
     fi
     postgresql_set_property "hot_standby" "on"
-}
 
-postgresql_configure_archive_parameters() {
+    info "Configuring archive parameters"
     postgresql_set_property "archive_mode" "on"
     postgresql_set_property "archive_timeout" "$POSTGRESQL_ARCHIVE_TIMEOUT"
     postgresql_set_property "archive_command" "/opt/bitnami/wal-g/bin/wal-g wal-push \"%p\" >> /proc/1/fd/1 2>\&1"
@@ -591,12 +590,20 @@ postgresql_initialize() {
 
     is_boolean_yes "$POSTGRESQL_ALLOW_REMOTE_CONNECTIONS" && is_boolean_yes "$create_pghba_file" && postgresql_create_pghba && postgresql_allow_local_connection
 
+    if is_dir_empty "$POSTGRESQL_DATA_DIR"; then
+        if ! is_dir_empty "$WALG_RESTORE_DIR"; then
+            warn "Starting wal-g restore"
+            /opt/bitnami/wal-g/bin/wal-g backup-fetch $POSTGRESQL_DATA_DIR LATEST
+            touch $POSTGRESQL_DATA_DIR/recovery.signal
+            warn "Wal-g restore finished!"
+        fi
+    fi
+
     if ! is_dir_empty "$POSTGRESQL_DATA_DIR"; then
         info "Deploying PostgreSQL with persisted data..."
         export POSTGRESQL_FIRST_BOOT="no"
         is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
         is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
-        is_boolean_yes "$create_conf_file" && postgresql_configure_archive_parameters
         is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
         is_boolean_yes "$create_conf_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && postgresql_configure_tls
         [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]] && [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
@@ -618,7 +625,6 @@ postgresql_initialize() {
             is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
             [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && postgresql_create_replication_user
             is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
-            is_boolean_yes "$create_conf_file" && postgresql_configure_archive_parameters
             is_boolean_yes "$create_pghba_file" && postgresql_configure_synchronous_replication
             is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
             is_boolean_yes "$create_conf_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && postgresql_configure_tls
@@ -627,7 +633,6 @@ postgresql_initialize() {
             postgresql_slave_init_db
             is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
             is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
-            is_boolean_yes "$create_conf_file" && postgresql_configure_archive_parameters
             is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
             is_boolean_yes "$create_conf_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && postgresql_configure_tls
             postgresql_configure_recovery

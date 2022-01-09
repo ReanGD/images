@@ -24,14 +24,13 @@ RUN install_packages acl ca-certificates curl gzip libbsd0 libbz2-1.0 libc6 libe
 
 COPY --chown=1000 rootfs /
 RUN /opt/bitnami/scripts/postgresql/postunpack.sh && \
-    /opt/bitnami/scripts/locales/add-extra-locales.sh
+    /opt/bitnami/scripts/locales/add-extra-locales.sh && \
+    /opt/scripts/walg-postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
     PATH="/opt/bitnami/wal-g/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/common/bin:$PATH"
-
-RUN /opt/scripts/walg-postunpack.sh
 
 USER runner
 VOLUME [ "/bitnami/postgresql", "/backup", "/docker-entrypoint-initdb.d", "/docker-entrypoint-preinitdb.d" ]

@@ -24,9 +24,6 @@ if [[ "$*" = *"/opt/bitnami/scripts/postgresql/run.sh"* ]]; then
     /opt/bitnami/scripts/postgresql/setup.sh
     touch "$POSTGRESQL_TMP_DIR"/.initialized
     info "** PostgreSQL setup finished! **"
-    info "** Starting Wal-g setup **"
-    /opt/scripts/walg-setup.sh
-    info "** Wal-g setup  finished! **"
 fi
 
 exec "$@"

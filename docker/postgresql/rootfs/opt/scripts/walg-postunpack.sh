@@ -10,7 +10,7 @@
 adduser --disabled-password --uid $RUN_USER_ID --ingroup root --gecos "" runner
 
 # wal-g configure
-ensure_dir_exists "$WALG_FILE_PREFIX" $RUN_USER_ID
+ensure_dir_exists "$WALG_RESTORE_DIR" $RUN_USER_ID
 
 # cron configure
 chmod u+s /usr/sbin/cron
