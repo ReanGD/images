@@ -1,8 +1,10 @@
 name: Helm Repo CI
 
 on:
+  workflow_dispatch:
   push:
-    branches: [ master ]
+    branches:
+    - master
 
 jobs:
   helm-release:
@@ -22,13 +24,11 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v1
 
-      - name: Add Helm Repo dependencies
-        run: helm repo add bitnami https://charts.bitnami.com/bitnami
-
-      - name: Run User chart-releaser
+      - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.2.1
         env:
           CR_TOKEN: "${{ secrets.REPO_TOKEN }}"
           CR_SKIP_EXISTING: true
         with:
-          charts_dir: charts
+          charts_dir: charts/*
+          charts_repo_url: https://reangd.github.io/images/
