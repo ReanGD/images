@@ -3,17 +3,15 @@ name: Docker Image CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
-  docker:
+  docker-image-release:
     runs-on: ubuntu-latest
     env:
       CONTEXT_SUBDIR: docker/postgresql/
     steps:
       - name: Login to DockerHub
-        uses: docker/login-action@v1 
+        uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
