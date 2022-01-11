@@ -28,7 +28,7 @@ jobs:
         uses: helm/chart-releaser-action@v1.2.1
         env:
           CR_TOKEN: "${{ secrets.REPO_TOKEN }}"
-          CR_SKIP_EXISTING: true
+          CR_SKIP_EXISTING: false
         with:
           charts_dir: charts/*
           charts_repo_url: https://reangd.github.io/images/
