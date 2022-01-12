@@ -34,9 +34,9 @@ service:
         port: 5432
 
 persistence:
-  psql_data:
+  psql-data:
     enabled: false
     mountPath: /bitnami/postgresql
-  psql_backup:
+  psql-backup:
     enabled: false
     mountPath: /backup
