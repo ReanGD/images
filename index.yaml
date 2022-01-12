@@ -5,6 +5,30 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 14.1.0
+    created: "2022-01-12T00:22:28.727564272Z"
+    dependencies:
+    - name: common
+      repository: https://library-charts.k8s-at-home.com
+      version: 4.3.0
+    description: Chart for PostgreSQL, an object-relational database management system
+      (ORDBMS) with an emphasis on extensibility and on standards-compliance.
+    digest: 700a044981d18a88cb7547c58c41d666b514a06997a2b697f4f5f60c2de7d195
+    home: https://github.com/ReanGD/images/tree/master/charts/postgresql
+    icon: https://bitnami.com/assets/stacks/postgresql/img/postgresql-stack-220x234.png
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - name: ReanGD
+    name: postgresql
+    sources:
+    - https://github.com/ReanGD/images/tree/master/postgresql/postgresql
+    - https://www.postgresql.org/
+    urls:
+    - https://github.com/ReanGD/images/releases/download/postgresql-1.0.1/postgresql-1.0.1.tgz
+    version: 1.0.1
+  - annotations:
+      category: Database
+    apiVersion: v2
+    appVersion: 14.1.0
     created: "2022-01-11T00:42:20.864150478Z"
     dependencies:
     - name: common
@@ -25,4 +49,4 @@ entries:
     urls:
     - https://github.com/ReanGD/images/releases/download/postgresql-1.0.0/postgresql-1.0.0.tgz
     version: 1.0.0
-generated: "2022-01-11T00:42:20.864491876Z"
+generated: "2022-01-12T00:22:28.727573572Z"
