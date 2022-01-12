@@ -4,7 +4,7 @@ description: Chart for PostgreSQL, an object-relational database management syst
 icon: https://bitnami.com/assets/stacks/postgresql/img/postgresql-stack-220x234.png
 home: https://github.com/ReanGD/images/tree/master/charts/postgresql
 name: postgresql
-version: 1.0.0
+version: 1.0.1
 kubeVersion: ">=1.16.0-0"
 sources:
   - https://github.com/ReanGD/images/tree/master/postgresql/postgresql
